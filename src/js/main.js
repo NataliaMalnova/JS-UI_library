@@ -1,12 +1,13 @@
 import $ from './lib/lib';
 
-
-$('.active').on('click', sayHello);
-
 $('button').on('click', function() {
-    $(this).toggleClass('active');
+    $('div').eq(2).toggleClass('active');
 });
 
-function sayHello() {
-    console.log('Hello');
-}
+$('div').click(function() {
+    console.log($(this).index());
+});
+
+//console.log($('button').html(''));
+console.log($('div').eq(1).find('.some'));
+ 
