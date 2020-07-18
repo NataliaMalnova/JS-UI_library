@@ -71,3 +71,58 @@ $.prototype.find = function(selector) {
     return this;
 
 };
+
+$.prototype.closest = function(selector) {
+    
+    let couner = 0;
+
+    for(let i = 0; i < this.length; i++) {
+        if(this[i].closest(selector) != null) {
+            this[i] = this[i].closest(selector);
+            couner++;
+        }
+      
+    }
+
+    const objLenght = Object.keys(this).length;
+    for(; couner < objLenght; couner++) {
+        delete this[couner];
+    }
+
+    return this;
+
+};
+
+
+$.prototype.siblings = function() {
+    
+    let numberOfNumbers = 0;  // общее кол-во эл-ов
+    let counter = 0; // кол-во записанных эл-ов
+    const copyObj = Object.assign({}, this);
+
+    for(let i = 0; i < copyObj.length; i++) {
+        const arr =  copyObj[i].parentNode.children;
+ 
+        for(let j = 0; j < arr.length; j++) {
+
+            if(copyObj[i] === arr[j]) {
+                continue;
+            }  
+
+            this[counter] = arr[j];
+            counter++;
+        }
+
+        numberOfNumbers += arr.length - 1;
+    }
+
+    this.length = numberOfNumbers;
+    const objLenght = Object.keys(this).length;
+
+    for(; numberOfNumbers < objLenght; numberOfNumbers++) {
+        delete this[numberOfNumbers];
+    }
+
+    return this;
+
+};
